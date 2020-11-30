@@ -1,0 +1,12 @@
+{
+    "authors": [
+        {
+            "name": "Vaibhav Pandey",
+            "email": "contact@vaibhavpandey.com"
+        }
+    ],
+    "description": "PHP client for sending SMS/OTP using MSG91.",
+    "license": "MIT",
+    "name": "vpz/msg91",
+    "type": "library"
+}
