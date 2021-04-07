@@ -25,13 +25,19 @@ class Client
     protected $key;
 
     /**
-     * Client constructor.
-     * @param string $key
+     * @var string|null
      */
-    public function __construct(string $key)
+    protected $sender;
+
+    /**
+     * @param string $key
+     * @param string|null $sender
+     */
+    public function __construct(string $key, ?string $sender = null)
     {
         $this->client = new Guzzle(['http_errors' => false]);
         $this->key = $key;
+        $this->sender = $sender;
     }
 
     /**
@@ -41,15 +47,11 @@ class Client
      */
     public function otp(string $number, ?string $sender = null): bool
     {
-        if (empty($sender) && function_exists('config')) {
-            $sender = config('msg91.sender');
-        }
-
         $response = $this->client->get(self::ENDPOINT_OTP, [
             'query' => [
                 'authkey' => $this->key,
                 'mobile' => $number,
-                'sender' => $sender,
+                'sender' => $sender ?: $this->sender,
             ],
         ]);
         if ($response->getStatusCode() === 200) {
@@ -92,10 +94,6 @@ class Client
      */
     public function sms($numbers, $messages, ?string $sender = null, int $route = self::ROUTE_TRANSACTIONAL, array $options = []): bool
     {
-        if (empty($sender) && function_exists('config')) {
-            $sender = config('msg91.sender');
-        }
-
         if (is_string($messages)) {
             $messages = [[
                 'message' => $messages,
@@ -107,7 +105,7 @@ class Client
             'headers' => ['authkey' => $this->key],
             'json' => [
                 'route' => $route,
-                'sender' => $sender,
+                'sender' => $sender ?: $this->sender,
                 'sms' => $messages,
             ] + $options,
         ]);

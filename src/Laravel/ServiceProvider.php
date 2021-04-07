@@ -24,7 +24,7 @@ class ServiceProvider extends Base
     {
         $this->mergeConfigFrom(__DIR__ . '/config/msg91.php', 'msg91');
         $this->app->bind(Client::class, function () {
-            return new Client(config('msg91.key'));
+            return new Client(config('msg91.key'), config('msg91.sender'));
         });
         $this->app->alias(Client::class, 'msg91');
         Notification::extend('msg91', function () {

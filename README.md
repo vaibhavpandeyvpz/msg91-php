@@ -120,7 +120,7 @@ $notifiable->notify(new App\Notifications\Msg91TestNotification());
 For sending the notification to an arbitrary number, use below syntax:
 ```php
 <?php
-use Illuminate\Support\Facades\Notification
+use Illuminate\Support\Facades\Notification;
 
 Notification::route('msg91', '919876543210')
     ->notify(new App\Notifications\Msg91TestNotification());
@@ -131,9 +131,9 @@ You can validate sent OTPs using provided validation rule named `msg91_otp` as s
 ```php
 <?php
 
-use Illuminate\Support\Facades\Validator
+use Illuminate\Support\Facades\Validator;
 
-$data = ['number' => '9876543210', 'otp' => '1234'];
+$data = ['phone' => '9876543210', 'otp' => '1234'];
 
 $validator = Validator::make($data, [
     'phone' => ['required', 'digits_between:10,12'],
