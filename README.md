@@ -1,10 +1,10 @@
-# vpz/msg91
+# vaibhavpandeyvpz/msg91
 PHP client for sending SMS/OTP using MSG91, includes optional support for Laravel.
 
 ### Installation
 
 ```bash
-composer require vpz/msg91
+composer require vaibhavpandeyvpz/msg91
 ```
 
 #### Laravel < 5.5

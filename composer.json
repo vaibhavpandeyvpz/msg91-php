@@ -25,7 +25,7 @@
         }
     },
     "license": "MIT",
-    "name": "vpz/msg91",
+    "name": "vaibhavpandeyvpz/msg91",
     "prefer-stable": true,
     "require": {
         "php": ">=7.0",
