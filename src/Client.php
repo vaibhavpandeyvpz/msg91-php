@@ -39,8 +39,12 @@ class Client
      * @param string|null $sender
      * @return bool
      */
-    public function otp(string $number, string $sender): bool
+    public function otp(string $number, ?string $sender = null): bool
     {
+        if (empty($sender) && function_exists('config')) {
+            $sender = config('msg91.sender');
+        }
+
         $response = $this->client->get(self::ENDPOINT_OTP, [
             'query' => [
                 'authkey' => $this->key,
@@ -81,13 +85,17 @@ class Client
     /**
      * @param string|string[]|null $numbers
      * @param string|string[] $messages
-     * @param string $sender
+     * @param string|null $sender
      * @param int|null $route
      * @param array $options
      * @return bool
      */
-    public function sms($numbers, $messages, string $sender, int $route = self::ROUTE_TRANSACTIONAL, array $options = []): bool
+    public function sms($numbers, $messages, ?string $sender = null, int $route = self::ROUTE_TRANSACTIONAL, array $options = []): bool
     {
+        if (empty($sender) && function_exists('config')) {
+            $sender = config('msg91.sender');
+        }
+
         if (is_string($messages)) {
             $messages = [[
                 'message' => $messages,

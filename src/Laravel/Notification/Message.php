@@ -49,7 +49,7 @@ class Message
         return $this;
     }
 
-    public function sender(string $sender): self
+    public function sender(?string $sender): self
     {
         $this->sender = $sender;
         return $this;

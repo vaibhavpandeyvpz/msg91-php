@@ -36,12 +36,12 @@ $ php artisan vendor:publish
 
 $result = Msg91::sms('919999999999', 'Hello there!');
  
-$result = Msg91::sms('919999999999', 'Hello there!', 'MESG91');
+$result = Msg91::sms('919999999999', 'Hello there!', 'MSGIND');
  
 $result = Msg91::sms(null, [
     ['to' => ['919999999999', '918888888888'], 'message' => 'Hello there!'],
     ['to' => ['917777777777'], 'message' => 'Come here!'],
-], 'MESG91');
+], 'MSGIND');
 ```
 
 - Send OTP to a number.
@@ -50,9 +50,9 @@ $result = Msg91::sms(null, [
 
 $result = Msg91::otp('919999999999');
    
-$result = Msg91::otp('919999999999', 'MESG91');
+$result = Msg91::otp('919999999999', 'MSGIND');
    
-$result = Msg91::otp('919999999999', 'MESG91', '##OTP## is your OTP, Please dont share it with anyone.');
+$result = Msg91::otp('919999999999', 'MSGIND', '##OTP## is your OTP, Please dont share it with anyone.');
 ```
 
 - Retry OTP (as voice) to a number.
@@ -94,7 +94,7 @@ public function toMsg91()
 {
     return (new Msg91Message)
         ->message(__('This is just a test message.'))
-        ->sender('MESG91')
+        ->sender('MSGIND')
         ->transactional();
 }
 ```
