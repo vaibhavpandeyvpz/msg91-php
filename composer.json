@@ -5,8 +5,35 @@
             "email": "contact@vaibhavpandey.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Msg91\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
     "description": "PHP client for sending SMS/OTP using MSG91.",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Msg91\\Laravel\\ServiceProvider"
+            ],
+            "aliases": {
+                "Msg91": "Msg91\\Laravel\\Facade"
+            }
+        }
+    },
     "license": "MIT",
     "name": "vpz/msg91",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.0",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^5.0 || ^6.0 || ^7.0"
+    },
+    "require-dev": {
+        "laravel/framework": "^5.0 || ^6.0 || ^7.0 || ^8.0"
+    },
     "type": "library"
 }
