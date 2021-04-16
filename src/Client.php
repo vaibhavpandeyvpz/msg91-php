@@ -43,16 +43,17 @@ class Client
     /**
      * @param string $number
      * @param string|null $sender
+     * @param array $options
      * @return bool
      */
-    public function otp(string $number, ?string $sender = null): bool
+    public function otp(string $number, ?string $sender = null, array $options = []): bool
     {
         $response = $this->client->get(self::ENDPOINT_OTP, [
             'query' => [
                 'authkey' => $this->key,
                 'mobile' => $number,
                 'sender' => $sender ?: $this->sender,
-            ],
+            ] + $options,
         ]);
         if ($response->getStatusCode() === 200) {
             $body = json_decode((string) $response->getBody(), true);
