@@ -34,25 +34,39 @@ $ php artisan vendor:publish
 ```php
 <?php
 
-$result = Msg91::sms('919999999999', 'Hello there!');
- 
-$result = Msg91::sms('919999999999', 'Hello there!', 'MSGIND');
- 
-$result = Msg91::sms(null, [
-    ['to' => ['919999999999', '918888888888'], 'message' => 'Hello there!'],
-    ['to' => ['917777777777'], 'message' => 'Come here!'],
-], 'MSGIND');
+// send an SMS to one number
+$result = Msg91::sms(
+    '919999999999',
+    'Hello there!',
+    'MSGIND',
+    4 /* 1 = Promotional; 4 = Transactional */,
+    [
+        'DLT_TE_ID' => '<dlt-registered-templated-id>',
+    ]
+);
+
+// send same/different SMS to multiple numbers
+$result = Msg91::sms(
+    null,
+    [
+        ['to' => ['919999999999', '918888888888'], 'message' => 'Hello fellas!'],
+        ['to' => ['917777777777'], 'message' => 'Hello vpz!'],
+    ],
+    'MSGIND',
+    4 /* 1 = Promotional; 4 = Transactional */,
+    [
+        'DLT_TE_ID' => '<dlt-registered-templated-id>',
+    ]
+);
 ```
 
 - Send OTP to a number.
 ```php
 <?php
 
-$result = Msg91::otp('919999999999');
-   
-$result = Msg91::otp('919999999999', 'MSGIND');
-   
-$result = Msg91::otp('919999999999', 'MSGIND', '##OTP## is your OTP, Please dont share it with anyone.');
+$result = Msg91::otp('919999999999', 'MSGIND', [
+    'template_id' => '<msg91-approved-otp-template-id>',
+]);
 ```
 
 - Retry OTP (as voice) to a number.
@@ -95,7 +109,10 @@ public function toMsg91()
     return (new Msg91Message)
         ->message(__('This is just a test message.'))
         ->sender('MSGIND')
-        ->transactional();
+        ->transactional()
+        ->options([
+            'DLT_TE_ID' => '<dlt-registered-templated-id>',
+        ]);
 }
 ```
 
@@ -122,7 +139,7 @@ For sending the notification to an arbitrary number, use below syntax:
 <?php
 use Illuminate\Support\Facades\Notification;
 
-Notification::route('msg91', '919876543210')
+Notification::route('msg91', '919999999999')
     ->notify(new App\Notifications\Msg91TestNotification());
 ```
 
@@ -133,7 +150,7 @@ You can validate sent OTPs using provided validation rule named `msg91_otp` as s
 
 use Illuminate\Support\Facades\Validator;
 
-$data = ['phone' => '9876543210', 'otp' => '1234'];
+$data = ['phone' => '919999999999', 'otp' => '1234'];
 
 $validator = Validator::make($data, [
     'phone' => ['required', 'digits_between:10,12'],

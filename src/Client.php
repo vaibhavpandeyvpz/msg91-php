@@ -6,10 +6,10 @@ use GuzzleHttp\Client as Guzzle;
 
 class Client
 {
-    const ENDPOINT_OTP = 'http://control.msg91.com/api/sendotp.php';
-    const ENDPOINT_OTP_RETRY = 'http://api.msg91.com/api/retryotp.php';
-    const ENDPOINT_OTP_VERIFY = 'http://api.msg91.com/api/verifyRequestOTP.php';
-    const ENDPOINT_SMS = 'http://api.msg91.com/api/v2/sendsms';
+    const ENDPOINT_OTP = 'https://api.msg91.com/api/v5/otp';
+    const ENDPOINT_OTP_RETRY = 'https://api.msg91.com/api/v5/otp/retry';
+    const ENDPOINT_OTP_VERIFY = 'https://api.msg91.com/api/v5/otp/verify';
+    const ENDPOINT_SMS = 'https://api.msg91.com/api/v2/sendsms';
 
     const ROUTE_PROMOTIONAL = 1;
     const ROUTE_TRANSACTIONAL = 4;
