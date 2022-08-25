@@ -40,7 +40,9 @@ class ServiceProvider extends Base
     public function boot()
     {
         Validator::extend('msg91_otp', function ($attribute, $value, $parameters, $validator) {
+            /** @var Client $client */
             $client = app(Client::class);
+            /** @var \Illuminate\Validation\Validator $validator */
             $values = $validator->getData();
             $number = Arr::get($values, empty($parameters[0]) ? 'phone' : $parameters[0]);
             return $client->verify($number, $value);
