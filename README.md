@@ -41,7 +41,7 @@ $result = Msg91::sms(
     'MSGIND',
     4 /* 1 = Promotional; 4 = Transactional */,
     [
-        'DLT_TE_ID' => '<dlt-registered-templated-id>',
+        'DLT_TE_ID' => '<dlt-registered-template-id>',
     ]
 );
 
@@ -55,7 +55,7 @@ $result = Msg91::sms(
     'MSGIND',
     4 /* 1 = Promotional; 4 = Transactional */,
     [
-        'DLT_TE_ID' => '<dlt-registered-templated-id>',
+        'DLT_TE_ID' => '<dlt-registered-template-id>',
     ]
 );
 ```
